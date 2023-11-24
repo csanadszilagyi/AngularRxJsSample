@@ -2,21 +2,11 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { ProductResourceService } from './services/product-resource.service';
 import { ShoppingService } from './services/shopping.service';
-import {
-  EMPTY,
-  Observable,
-  combineLatest,
-  map,
-  of,
-  pipe,
-  startWith,
-} from 'rxjs';
+import { EMPTY, Observable, combineLatest, map, of, startWith } from 'rxjs';
 import { Product, ProductCategory } from './models/product.model';
 import { MultiSelect } from 'primeng/multiselect';
 import { Slider } from 'primeng/slider';
@@ -26,7 +16,7 @@ import { Slider } from 'primeng/slider';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements AfterViewInit {
   public categories = Object.values(ProductCategory);
 
   public productListSource$: Observable<Product[]> = EMPTY;
@@ -43,10 +33,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private productResourceService: ProductResourceService,
-    private shoppingService: ShoppingService
+    private shoppingService: ShoppingService,
+    private cd: ChangeDetectorRef
   ) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.productListSource$ = this.productResourceService.getProducts();
@@ -67,11 +56,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       map(([products, categories, priceRanges]) =>
         products
           .filter((p) =>
-            categories.length ? categories.includes(p.category!) : true
+            categories.length ? categories.includes(p.category) : true
           )
           .filter((p) => p.price >= priceRanges[0] && p.price <= priceRanges[1])
       )
     );
+    this.cd.detectChanges();
   }
 
   addCart(p: Product) {
@@ -82,5 +72,4 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log($event);
     console.log(this.priceRange);
   }
-  ngOnDestroy(): void {}
 }
