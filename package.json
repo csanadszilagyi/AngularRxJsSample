@@ -1,5 +1,5 @@
 {
-  "name": "material-app",
+  "name": "angular-rxjs-sample",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

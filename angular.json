@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MaterialApp": {
+    "AngularRxJsSample": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -89,10 +89,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "MaterialApp:build:production"
+              "browserTarget": "AngularRxJsSample:build:production"
             },
             "development": {
-              "browserTarget": "MaterialApp:build:development"
+              "browserTarget": "AngularRxJsSample:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -100,7 +100,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MaterialApp:build"
+            "browserTarget": "AngularRxJsSample:build"
           }
         },
         "test": {
