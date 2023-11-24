@@ -1,0 +1,40 @@
+<div class="layout-topbar">
+  <div class="layout-topbar-wrapper">
+    <div class="layout-topbar-left flex-column justify-content-center">
+      <h3 class="align-self-center">{{ hasFreeShipping$ | async }}</h3>
+    </div>
+    <div class="layout-topbar-right">
+
+      <ul class="layout-topbar-actions">
+        <li class="topbar-item">
+          <!-- pi-inbox -->
+          <a href="#" (click)="op.toggle($event)"><i class="topbar-icon pi pi-shopping-cart" pBadge
+              value="{{ numProductsInCart$ | async }}"></i> <span class="cart-price">{{(totalCost$ | async) |
+              hunMoney}}</span></a>
+          <p-overlayPanel #op>
+            <ng-template pTemplate="content">
+
+              <div class="cart-content">
+                <div *ngFor="let product of cartProducts$ | async" class="flex flex-wrap p-2 align-items-center gap-3">
+                  <img class="w-4rem shadow-2 flex-shrink-0 border-round" src="assets/images/cherry.jpg"
+                    alt="{{product.name}}" />
+                  <div class="flex-1 flex flex-row gap-2">
+                    <span class="font-bold">{{ product.name }}</span>
+                    <!-- <div class="flex align-products-center gap-2">
+                          <i class="pi pi-tag text-sm"></i>
+                          <span>{{ product.category }}</span>
+                      </div> -->
+
+                  </div>
+                  <span class="font-bold text-900">{{ product.price | hunMoney }}</span>
+                  <p-button (click)="removeProduct($event, product)" icon="pi pi-trash" [rounded]="true" [text]="true"
+                    severity="danger"></p-button>
+                </div>
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
