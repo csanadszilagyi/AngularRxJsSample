@@ -10,8 +10,8 @@
 
         <div class="slider-container flex align-items-center flex-row gap-2">
           <span class="min">{{ priceRange[0] | hunMoney }}</span>
-          <p-slider #priceRangeSlider (onChange)="priceRangeChanged($event)" [(ngModel)]="priceRange" [range]="true"
-            orientation="horizontal" [min]="0" [max]="10000" [step]="100"></p-slider>
+          <p-slider #priceRangeSlider [(ngModel)]="priceRange" [range]="true" orientation="horizontal" [min]="0"
+            [max]="10000" [step]="100"></p-slider>
           <span class="max">{{ priceRange[1] | hunMoney }}</span>
         </div>
       </div>

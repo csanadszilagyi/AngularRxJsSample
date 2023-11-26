@@ -39,10 +39,12 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.productListSource$ = this.productResourceService.getProducts();
+
     this.categoriesSelected$ = this.categorySelect.onChange.pipe(
       startWith({ value: [] }),
       map((v) => v?.value as ProductCategory[])
     );
+
     this.priceRangeFilter$ = this.priceRangeSlider.onChange.pipe(
       startWith({ values: this.priceRange }),
       map((e) => e?.values ?? [])
@@ -66,10 +68,5 @@ export class AppComponent implements AfterViewInit {
 
   addCart(p: Product) {
     this.shoppingService.addProductToCart(p);
-  }
-
-  priceRangeChanged($event: any) {
-    console.log($event);
-    console.log(this.priceRange);
   }
 }

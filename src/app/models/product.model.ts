@@ -10,3 +10,10 @@ export interface Product {
   rating?: number; // 1..5
   category: ProductCategory;
 }
+
+export interface ProductGroup {
+  name: string;
+  productPrice: number;
+  totalPrice: number;
+  quantity: number;
+}

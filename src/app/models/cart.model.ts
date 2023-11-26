@@ -1,6 +1,7 @@
-import { Product } from './product.model';
+import { Product, ProductGroup } from './product.model';
 
 export interface Cart {
-  selectedProducts: Product[];
-  // sumPrice: number;
+  selectedProducts: Map<string, ProductGroup>; // store product groups by their name
+  totalCost: number;
+  totalCount: number;
 }

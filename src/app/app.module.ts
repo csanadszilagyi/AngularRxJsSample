@@ -17,6 +17,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RatingModule } from 'primeng/rating';
 import { SliderModule } from 'primeng/slider';
 import { DividerModule } from 'primeng/divider';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 registerLocaleData(localeHu, 'hu');
 
@@ -36,6 +37,7 @@ registerLocaleData(localeHu, 'hu');
     RatingModule,
     SliderModule,
     DividerModule,
+    InputNumberModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'hu' }],
   bootstrap: [AppComponent],
