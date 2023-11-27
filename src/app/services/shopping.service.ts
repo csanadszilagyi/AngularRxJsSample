@@ -55,15 +55,16 @@ export class ShoppingService {
 
   public updateQuantityBy(productName: string, quantityBy: number) {
     const currentState = this.cartState;
-    const newState = {
-      selectedProducts: new Map(currentState.selectedProducts),
-      totalCost: currentState.totalCost,
-      totalCount: currentState.totalCount + quantityBy,
-    };
 
-    const cartGroup = newState.selectedProducts.get(productName);
+    const cartGroup = currentState.selectedProducts.get(productName);
 
     if (cartGroup) {
+      const newState = {
+        ...currentState,
+        selectedProducts: new Map(currentState.selectedProducts),
+        totalCount: currentState.totalCount + quantityBy,
+      };
+
       const price = cartGroup.productPrice * quantityBy;
       cartGroup.quantity += quantityBy;
       cartGroup.totalPrice += price;
@@ -74,15 +75,21 @@ export class ShoppingService {
 
   public removeProductFromCart(productName: string, quantity: number = 1) {
     const currentState = this.cartState;
-    const newState = {
-      ...currentState,
-      selectedProducts: new Map(currentState.selectedProducts),
-    };
 
-    const group = newState.selectedProducts.get(productName);
+    const group = currentState.selectedProducts.get(productName);
     if (group) {
-      let newQuantity = group.quantity - quantity;
+      // let newQuantity = group.quantity - quantity;
 
+      const newState = {
+        ...currentState,
+        selectedProducts: new Map(currentState.selectedProducts),
+      };
+
+      newState.totalCost -= group.totalPrice;
+      newState.totalCount -= group.quantity;
+      newState.selectedProducts.delete(productName);
+
+      /*
       if (newQuantity < 1) {
         newState.totalCost -= group.totalPrice;
         newState.totalCount -= group.quantity;
@@ -94,6 +101,7 @@ export class ShoppingService {
         newState.totalCost -= priceOfSelectedProducts;
         newState.totalCount -= quantity;
       }
+      */
       this.cartStateSource$.next(newState);
     }
   }

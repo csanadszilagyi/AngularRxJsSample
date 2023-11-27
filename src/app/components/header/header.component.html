@@ -28,10 +28,8 @@
 
                   </div>
                   <p-inputNumber (onInput)="handleQuantityChange($event, product.value.name)"
-                    [ngModel]="product.value.quantity" [showButtons]="true" buttonLayout="horizontal"
-                    inputId="horizontal" spinnerMode="horizontal" [step]="quantityStep"
-                    decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success"
-                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
+                    [ngModel]="product.value.quantity" [showButtons]="true" [min]="1" inputId="quantity-stepper"
+                    spinnerMode="horizontal" [step]="quantityStep"></p-inputNumber>
 
                   <!-- <span class="font-bold text-900">{{ product.value.quantity + 'x' }}</span> -->
                   <span class="font-bold text-900">{{ product.value.totalPrice | hunMoney }}</span>
